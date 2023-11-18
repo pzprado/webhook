@@ -1,5 +1,6 @@
 /// <reference lib="dom" />
 /// <reference lib="dom.iterable" />
+/* ENTRY POINT */
 
 import triggers from "./middleware/mod.ts";
 import server from "./helper/server.ts";
