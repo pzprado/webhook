@@ -35,11 +35,11 @@ export class Bot {
    */
   public async send(channel: string | number, message: string, topic: string, link?: string) {
     if (!link) {
-      return await this._instance.api.sendMessage(channel, message, reply_to_message_id=env["TOPIC_ID"], {
+      return await this._instance.api.sendMessage(channel, message, topic, {
         parse_mode: "HTML",
       });
     } else {
-      return await this._instance.api.sendMessage(channel, message, reply_to_message_id=env["TOPIC_ID"], {
+      return await this._instance.api.sendMessage(channel, message, topic, {
         parse_mode: "HTML",
         reply_markup: new InlineKeyboard().url("View it on GitHub", link),
       });
@@ -53,7 +53,7 @@ export class Bot {
    */
   public async push(message: string, link = "") {
     for (const channel of this._channels) {
-      await this.send(channel, message, topic, link);
+      await this.send(channel, message, env["TOPIC_ID"], link);
     }
   }
 }
