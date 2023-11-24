@@ -53,7 +53,7 @@ export class Bot {
    */
   public async push(message: string, link = "") {
     for (const channel of this._channels) {
-      await this.send(channel, message, reply_to_message_id=env["TOPIC_ID"], link);
+      await this.send(channel, message, link);
     }
   }
 }
