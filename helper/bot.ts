@@ -6,7 +6,7 @@ export class Bot {
   private _channels: (string | number)[] = [];
   private _instance: Grammy;
 
-  constructor(token: string = env["TOKEN"], channel: string = "") {
+  constructor(token: string = env["TOKEN"], channel: string = "", topic: string = env["TOPIC_ID"]) {
     if (!token) {
       throw new Error("No token provided");
     } else {
@@ -33,13 +33,13 @@ export class Bot {
    * @param link Some link to attach to the message
    * @returns void
    */
-  public async send(channel: string | number, message: string, link?: string) {
+  public async send(channel: string | number, message: string, topic?: string | number, link?: string) {
     if (!link) {
-      return await this._instance.api.sendMessage(channel, message, reply_to_message_id=env["TOPIC_ID"], {
+      return await this._instance.api.sendMessage(channel, message, {
         parse_mode: "HTML",
       });
     } else {
-      return await this._instance.api.sendMessage(channel, message, reply_to_message_id=env["TOPIC_ID"], {
+      return await this._instance.api.sendMessage(channel, message, {
         parse_mode: "HTML",
         reply_markup: new InlineKeyboard().url("View it on GitHub", link),
       });
