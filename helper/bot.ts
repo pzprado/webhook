@@ -54,6 +54,7 @@ export class Bot {
   public async push(message: string, link = "") {
     for (const channel of this._channels) {
       await this.send(channel, message, link);
+      console.log(channel, message, link);
     }
   }
 }
