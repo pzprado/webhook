@@ -35,11 +35,11 @@ export class Bot {
    */
   public async send(channel: string | number, message: string, link?: string) {
     if (!link) {
-      return await this._instance.api.sendMessage(channel, message, 229, {
+      return await this._instance.api.sendMessage(channel, message, message_thread_id=229, {
         parse_mode: "HTML",
       });
     } else {
-      return await this._instance.api.sendMessage(channel, message, 229, {
+      return await this._instance.api.sendMessage(channel, message, message_thread_id=229, {
         parse_mode: "HTML",
         reply_markup: new InlineKeyboard().url("View it on GitHub", link),
       });
