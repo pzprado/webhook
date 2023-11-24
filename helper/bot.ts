@@ -33,13 +33,15 @@ export class Bot {
    * @param link Some link to attach to the message
    * @returns void
    */
-  public async send(channel: string | number, message: string, topic: number, link?: string) {
+  public async send(channel: string | number, message: string, link?: string) {
     if (!link) {
-      return await this._instance.api.sendMessage(channel, message, topic, {
+      return await this._instance.api.sendMessage(channel, message, {
+        message_thread_id: 229,
         parse_mode: "HTML",
       });
     } else {
-      return await this._instance.api.sendMessage(channel, message, topic, {
+      return await this._instance.api.sendMessage(channel, message, {
+        message_thread_id: 229,
         parse_mode: "HTML",
         reply_markup: new InlineKeyboard().url("View it on GitHub", link),
       });
@@ -51,10 +53,10 @@ export class Bot {
    * @param message Message to deliver to the channel
    * @param link Some link to attach to the message
    */
-  public async push(message: string, topic = 229, link = "") {
+  public async push(message: string, link = "") {
     for (const channel of this._channels) {
-      await this.send(channel, message, topic, link);
-      console.log(channel, message, topic, link);
+      await this.send(channel, message, link);
+      console.log(channel, message, link);
     }
   }
 }
